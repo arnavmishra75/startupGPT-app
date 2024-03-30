@@ -1,0 +1,30 @@
+<div class="page" [class.night-mode]="isNightMode">
+  <div class="logo-container">
+    <button class="logo-button" (click)="resetHome()">
+      <img src="./assets/bluestartuplogo2.0.png" alt="Logo" class="logo-image" />
+    </button>
+  </div>
+  <div class="search-container">
+    <div class="search-input-container">
+      <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery" (keyup)="onEnterKeyPress($event)" />
+      <button class="search-button" (click)="onSearch()">
+        <img src="./assets/search-icon.png" alt="Search" class="search-icon" />
+      </button>
+      <div *ngIf="searchQuery.length > 0">
+      <button class="clear-button" (click)="clearSearch()">Clear</button>
+      </div>
+    </div>
+  </div>
+  <button class="night-mode-button" (click)="toggleNightMode()">
+    <img [src]="isNightMode ? './assets/sun-icon.png' : './assets/moon-icon.png'" alt="Toggle Night Mode" class="mode-icon" />
+  </button>
+  <div *ngIf="searchResult.length > 0" class="result-container">
+    <div id="responseContainer" class="result" [innerHTML]="searchResult">
+    </div>
+  </div>
+  <div *ngIf="isLoading" class="loading-container">
+    <span>Thinking...</span>
+    <span class="loading-animation"></span>
+  </div>
+  <button class="switch-api-button" (click)="switchAPI()">{{ getAPIButtonLabel() }}</button>
+</div>
